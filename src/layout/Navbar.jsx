@@ -1,8 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router";
-import User from "../assets/user.png";
+import { Link, NavLink } from "react-router";
+import UserIcon from "../assets/user.png";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const { user } = use(AuthContext);
+  console.log(user);
   return (
     <div className="flex justify-between items-center mt-10">
       <div></div>
@@ -12,8 +15,11 @@ const Navbar = () => {
         <NavLink to={"/career"}>Career</NavLink>
       </div>
       <div className="flex justify-center items-center gap-2">
-        <img src={User} alt="" />
-        <button className="btn btn-primary px-10">Login</button>
+        <img src={UserIcon} alt="" />
+        <button className="btn btn-primary px-10">
+          <Link to={"/auth/login"}>Login</Link>
+          {user && user.email}
+        </button>
       </div>
     </div>
   );
